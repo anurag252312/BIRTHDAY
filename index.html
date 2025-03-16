@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Flipbook</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffebf0;
+            font-family: Arial, sans-serif;
+        }
+        .book {
+            width: 300px;
+            height: 400px;
+            position: relative;
+            perspective: 1500px;
+        }
+        .page {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            transition: transform 1s;
+            transform-origin: left;
+            backface-visibility: hidden;
+        }
+
+        /* Add Hearts to Both Sides */
+        .page::before, .page::after {
+            content: "❤️";
+            position: absolute;
+            font-size: 30px;
+        }
+        .page::before {
+            top: 10px;
+            left: 10px;
+        }
+        .page::after {
+            bottom: 10px;
+            right: 10px;
+        }
+
+        /* Stacking order */
+        #page1 { background: pink; z-index: 3; }
+        #page2 { background: lightblue; z-index: 2; }
+        #page3 { background: lightgreen; z-index: 1; }
+
+        /* Flip Effect */
+        .flipped {
+            transform: rotateY(-180deg);
+        }
+
+        /* Second Page with Two Photos */
+        .page2-container {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+        .page2-container img {
+            width: 45%;
+            height: 80%;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="book">
+        <div class="page" id="page1" onclick="flipPage(1)">🎂 Tap to Open 🎉</div>
+        <div class="page" id="page2" onclick="flipPage(2)">
+            <div class="page2-container">
+                <img src="file:///D:/WhatsApp%20Image%202025-03-13%20at%208.36.33%20PM.jpeg" alt="Photo 1">  
+                <img src="file:///D:/WhatsApp%20Image%202025-03-13%20at%208.36.33%20PM%20(1).jpeg" alt="Photo 2">  
+            </div>
+        </div>
+        <div class="page" id="page3">🎁 Happy Birthday🎊 meri pyari mitr tu mere sabse ache dost hai krishna ji 
+		tere sari problem dur ker deh tu hamesha khush rahe aur tu life me succesfull hoo or jisse tu imagination me rakh
+		rahe hai vo tujhe realty me mile me bhagwan se prathana kerounga😌</div>
+    </div>
+
+    <script>
+        function flipPage(pageNumber) {
+            let page = 
+			document.getElementById('page${pageNumber}');
+            page.classList.add("flipped");
+            page.style.zIndex = ${3 - pageNumber};
+        }
+    </script>
+
+</body>
+</html>
